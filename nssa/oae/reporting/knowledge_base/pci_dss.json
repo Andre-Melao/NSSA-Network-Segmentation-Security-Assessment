@@ -1,0 +1,367 @@
+{
+  "framework": "pci_dss",
+  "name": "Payment Card Industry Data Security Standard",
+  "version": "4.0.1",
+    "controls": [
+    {
+        "control_id": "1.2.5",
+        "assessment_scope": "full",
+        "title": "Restrict Network Communications to Approved Services, Protocols and Ports",
+        "intent": "Ensure that only explicitly authorised network services, protocols and ports are permitted, reducing unnecessary attack surface and preventing unauthorised communications.",
+        "security_goal": [
+            "Minimise attack surface",
+            "Enforce least functionality",
+            "Prevent unauthorised service exposure"
+        ],
+        "summary": "Only services, protocols and ports with a documented business need should be reachable. Unexpected reachable services or ports indicate ineffective enforcement of network security controls.",
+        "nssa_relevance": "NSSA directly verifies whether observed network reachability matches the authorised communication policy defined in the segmentation model.",
+        "applicable_to": [
+            "Direct Policy Violation",
+            "Segment Isolation Violation",
+            "Host Scoped Access Violation"
+        ],
+        "expected_evidence": [
+            "Unexpected reachable port",
+            "Unauthorised protocol",
+            "Unexpected service exposure",
+            "Communication violating the declared policy"
+        ],
+        "assessment_notes": [
+            "A successful connection to a service or port that is not authorised by policy constitutes objective evidence that network security controls are not enforcing the intended restrictions."
+        ],
+        "limitations": [
+            "Cannot determine whether the service was formally approved or documented."
+        ],
+        "keywords": [
+            "services",
+            "protocols",
+            "ports",
+            "allowlist",
+            "segmentation"
+        ]
+    },
+    {
+        "control_id": "1.2.7",
+        "assessment_scope": "partial",
+        "title": "Verify the Continued Effectiveness of Network Security Controls",
+        "intent": "Ensure that network security controls continue to enforce only authorised communications and remain aligned with the intended security policy.",
+        "security_goal": [
+            "Detect configuration drift",
+            "Maintain effective segmentation",
+            "Provide continuous assurance"
+        ],
+        "summary": "Unexpected connectivity may indicate that network security controls are no longer enforcing the intended policy and should be reviewed.",
+        "nssa_relevance": "Every NSSA finding represents technical evidence that the observed network behaviour differs from the expected segmentation policy.",
+        "applicable_to": [
+            "Direct Policy Violation",
+            "Segment Isolation Violation",
+            "Host Scoped Access Violation",
+            "Mandatory Transit Path Bypass"
+        ],
+        "expected_evidence": [
+            "Unexpected connectivity",
+            "Residual communication path",
+            "Successful prohibited connection"
+        ],
+        "assessment_notes": [
+            "NSSA cannot determine whether periodic reviews are performed, but can provide objective evidence that network security controls are not behaving as intended."
+        ],
+        "limitations": [
+            "Does not assess organisational review processes or change management activities."
+        ],
+        "keywords": [
+            "configuration drift",
+            "validation",
+            "review",
+            "segmentation"
+        ]
+    },
+    {
+        "control_id": "1.3.1",
+        "related_controls": [
+            "1.3.2"
+        ],
+        "assessment_scope": "full",
+        "title": "Restrict Network Access To and From the Cardholder Data Environment",
+        "intent": "Ensure that only explicitly authorised inbound and outbound communications are permitted between the CDE and other network segments.",
+        "security_goal": [
+            "Protect CDE boundaries",
+            "Prevent unauthorised communications",
+            "Maintain network segmentation"
+        ],
+        "summary": "All communications entering or leaving the CDE should be explicitly authorised. Unexpected connectivity indicates ineffective segmentation enforcement.",
+        "nssa_relevance": "NSSA directly validates whether observed connectivity towards or from protected assets matches the authorised segmentation policy.",
+        "applicable_to": [
+            "Segment Isolation Violation",
+            "Direct Policy Violation",
+            "Mandatory Transit Path Bypass"
+        ],
+        "expected_evidence": [
+            "Unexpected inbound communication",
+            "Unexpected outbound communication",
+            "Unauthorised source or destination",
+            "Connectivity violating policy"
+        ],
+        "assessment_notes": [
+            "A single successful unauthorised connection entering or leaving the CDE is sufficient evidence that network isolation is not fully enforced."
+        ],
+        "limitations": [
+            "Does not assess packet inspection, application-layer filtering or encrypted traffic inspection."
+        ],
+        "keywords": [
+            "CDE",
+            "segmentation",
+            "boundary",
+            "reachability"
+        ]
+    },
+    {
+        "control_id": "1.4.2",
+        "assessment_scope": "partial",
+        "title": "Restrict Inbound Communications from Untrusted Networks",
+        "intent": "Ensure that only authorised inbound communications and legitimate responses to established connections are permitted into trusted networks.",
+        "security_goal": [
+            "Protect trusted networks",
+            "Prevent unsolicited inbound communications"
+        ],
+        "summary": "Inbound communications should be restricted to authorised services and legitimate responses to established communications.",
+        "nssa_relevance": "NSSA can verify whether prohibited inbound communications succeed but cannot determine whether stateful inspection mechanisms are correctly implemented.",
+        "applicable_to": [
+            "Segment Isolation Violation",
+            "Direct Policy Violation"
+        ],
+        "expected_evidence": [
+            "Unexpected inbound reachability",
+            "Unauthorised communication from an untrusted network"
+        ],
+        "assessment_notes": [
+            "NSSA validates the observable behaviour of the network rather than the implementation of stateful inspection."
+        ],
+        "limitations": [
+            "Cannot determine whether traffic is allowed as part of an existing stateful session."
+        ],
+        "keywords": [
+            "inbound",
+            "trusted network",
+            "stateful inspection"
+        ]
+    },
+    {
+        "control_id": "1.4.4",
+        "assessment_scope": "full",
+        "title": "Prevent Direct Network Access to Systems Storing Cardholder Data",
+        "intent": "Ensure that systems storing cardholder data are not directly reachable from untrusted networks.",
+        "security_goal": [
+            "Protect cardholder data",
+            "Reduce exposure of critical assets",
+            "Maintain layered network defence"
+        ],
+        "summary": "Systems storing cardholder data should only be reachable through authorised network paths. Direct access from untrusted networks represents ineffective segmentation.",
+        "nssa_relevance": "NSSA directly verifies whether protected assets are reachable from prohibited network segments.",
+        "applicable_to": [
+            "Segment Isolation Violation",
+            "Direct Policy Violation",
+            "Mandatory Transit Path Bypass"
+        ],
+        "expected_evidence": [
+            "Direct reachability to protected systems",
+            "Unexpected access path",
+            "Unauthorised communication to sensitive assets"
+        ],
+        "assessment_notes": [
+            "Successful direct communication with protected systems constitutes objective evidence that network isolation has failed."
+        ],
+        "limitations": [
+            "Assumes the protected assets are correctly identified in the policy model."
+        ],
+        "keywords": [
+            "cardholder data",
+            "protected assets",
+            "segmentation",
+            "reachability"
+        ]
+    },
+    {
+        "control_id": "1.5.1",
+        "assessment_scope": "partial",
+        "title": "Mitigate Risks from Devices Connected to Both Untrusted Networks and the CDE",
+        "intent": "Reduce the risk that devices connected to untrusted networks can be used as a bridge to access the CDE.",
+        "security_goal": [
+            "Limit lateral movement",
+            "Protect the CDE",
+            "Reduce exposure from dual-homed devices"
+        ],
+        "summary": "Devices capable of communicating with both untrusted networks and the CDE should not create unauthorised communication paths into protected environments.",
+        "nssa_relevance": "NSSA can identify unexpected reachability involving devices connected to multiple trust zones but cannot assess endpoint security controls.",
+        "applicable_to": [
+            "Segment Isolation Violation",
+            "Direct Policy Violation"
+        ],
+        "expected_evidence": [
+            "Unexpected communication path",
+            "Reachability through a dual-connected device"
+        ],
+        "assessment_notes": [
+            "NSSA validates network exposure but cannot determine whether host-based protections, such as endpoint security controls, are present."
+        ],
+        "limitations": [
+            "Does not assess endpoint hardening, EDR, personal firewalls or device posture."
+        ],
+        "keywords": [
+            "dual-homed devices",
+            "lateral movement",
+            "CDE",
+            "network exposure"
+        ]
+    },
+    {
+        "control_id": "2.2.3",
+        "assessment_scope": "partial",
+        "title": "Isolate System Functions with Different Security Levels",
+        "intent": "Ensure that system functions requiring different levels of protection cannot communicate in ways that reduce the security of higher-trust functions.",
+        "security_goal": [
+            "Preserve isolation between security domains",
+            "Prevent lower-trust components from reaching higher-trust assets",
+            "Limit lateral movement"
+        ],
+        "summary": "Functions with different security requirements should be isolated so that lower-security workloads cannot adversely affect more sensitive systems.",
+        "nssa_relevance": "NSSA can validate whether the intended network isolation between workloads of different trust levels is effectively enforced.",
+        "applicable_to": [
+            "Segment Isolation Violation",
+            "Host Scoped Access Violation",
+            "Mandatory Transit Path Bypass"
+        ],
+        "expected_evidence": [
+            "Unexpected communication between isolated workloads",
+            "Reachability across security domains",
+            "Unauthorised lateral communication"
+        ],
+        "assessment_notes": [
+            "Observed communication between components that should be isolated indicates that the intended separation is not effectively enforced."
+        ],
+        "limitations": [
+            "Cannot determine whether isolation is implemented through virtualization, containers, operating system mechanisms or network controls."
+        ],
+        "keywords": [
+            "isolation",
+            "security domains",
+            "workload separation",
+            "lateral movement"
+        ]
+    },
+    {
+        "control_id": "2.2.4",
+        "assessment_scope": "partial",
+        "title": "Limit Exposed Network Services to Those Required for Business",
+        "intent": "Reduce the attack surface by ensuring that only required network-accessible services are exposed.",
+        "security_goal": [
+            "Reduce attack surface",
+            "Prevent unnecessary network exposure",
+            "Limit exploitation opportunities"
+        ],
+        "summary": "Only network services that are required for business operation should be reachable. Unexpected exposed services increase the attack surface.",
+        "nssa_relevance": "NSSA can identify services that are reachable over the network but are not expected according to the declared segmentation policy.",
+        "applicable_to": [
+            "Direct Policy Violation",
+            "Segment Isolation Violation"
+        ],
+        "expected_evidence": [
+            "Unexpected reachable service",
+            "Unexpected listening port",
+            "Network exposure not defined by policy"
+        ],
+        "assessment_notes": [
+            "NSSA evaluates externally observable network exposure rather than the internal software configuration of the host."
+        ],
+        "limitations": [
+            "Cannot determine whether unnecessary services exist but are not network-accessible."
+        ],
+        "keywords": [
+            "service exposure",
+            "attack surface",
+            "reachable services",
+            "network hardening"
+        ]
+    },
+    {
+        "control_id": "7.2.1",
+        "related_controls": [
+            "7.2.2"
+        ],
+        "assessment_scope": "partial",
+        "title": "Restrict Network Access According to Business Need",
+        "intent": "Ensure that only authorised systems are able to establish network communication with protected resources according to business need and least privilege principles.",
+        "security_goal": [
+            "Enforce least privilege",
+            "Restrict unnecessary network access",
+            "Prevent unauthorised reachability"
+        ],
+        "summary": "Network communication should only be possible from systems that have an explicit business need to access the protected resource. Unexpected connectivity indicates excessive network access privileges.",
+        "nssa_relevance": "NSSA validates whether observed network reachability matches the authorised host-to-service relationships defined in the segmentation policy.",
+        "applicable_to": [
+            "Host Scoped Access Violation"
+        ],
+        "expected_evidence": [
+            "Unauthorised host reaches protected service",
+            "Additional workload has network access",
+            "Unexpected host-to-service communication"
+        ],
+        "assessment_notes": [
+            "The finding concerns network-level authorisation rather than user authentication or application permissions.",
+            "Observed communication from a host that is not explicitly authorised provides objective evidence that least-privilege network access is not being enforced."
+        ],
+        "limitations": [
+            "Cannot determine user identities, application roles, RBAC, ABAC or operating-system permissions.",
+            "Cannot determine whether application-layer authorisation subsequently denied the request."
+        ],
+        "keywords": [
+            "least privilege",
+            "business need",
+            "host allowlist",
+            "network authorisation",
+            "host scoped access"
+        ]
+    },
+    {
+        "control_id": "12.5.2",
+        "assessment_scope": "partial",
+        "title": "Validate PCI DSS Scope Through Segmentation Verification",
+        "intent": "Ensure that the defined PCI DSS scope remains accurate by periodically validating that network segmentation controls continue to isolate the Cardholder Data Environment (CDE) from out-of-scope systems.",
+        "security_goal": [
+            "Maintain accurate PCI DSS scope",
+            "Verify continued effectiveness of network segmentation",
+            "Detect scope expansion caused by segmentation failures"
+        ],
+        "summary": "Network segmentation should continue to enforce the intended PCI DSS scope by preventing unauthorized communication between in-scope and out-of-scope environments. Unexpected reachability may indicate that the effective PCI DSS scope has changed.",
+        "nssa_relevance": "NSSA provides technical evidence supporting PCI DSS scope validation by verifying whether observed network connectivity matches the intended segmentation policy and whether the CDE remains properly isolated.",
+        "applicable_to": [
+            "Segment Isolation Violation",
+            "Direct Policy Violation",
+            "Host Scoped Access Violation",
+            "Mandatory Transit Path Bypass"
+        ],
+        "expected_evidence": [
+            "Unexpected communication with CDE assets",
+            "Segmentation failure exposing protected environments",
+            "Unauthorized network path crossing scope boundaries"
+        ],
+        "assessment_notes": [
+            "NSSA contributes evidence for the network segmentation portion of PCI DSS scope validation.",
+            "Unexpected reachability may indicate that systems previously considered out of scope have become effectively connected to the CDE."
+        ],
+        "limitations": [
+            "Does not identify cardholder data locations.",
+            "Does not discover payment data flows.",
+            "Does not build or validate complete PCI DSS scope documentation.",
+            "Does not replace a full PCI DSS scoping exercise."
+        ],
+        "keywords": [
+            "PCI scope",
+            "scope validation",
+            "network segmentation",
+            "CDE isolation",
+            "segmentation verification"
+        ]
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "framework": "nist_csf",
+  "name": "NIST Cybersecurity Framework",
+  "version": "2.0",
+  "controls": [
+    {
+      "control_id": "ID.AM-03",
+      "assessment_scope": "partial",
+      "title": "Representations of Authorized Network Communication and Data Flows are Maintained",
+      "intent": "Ensure that authorized network communications and internal and external network data flows are defined and maintained to support secure network operation and risk management.",
+      "security_goal": [
+        "Maintain authorized communication paths",
+        "Support secure network architecture",
+        "Prevent unauthorized communication"
+      ],
+      "summary": "Authorized network communications and data flows should be documented and reflected in the deployed network architecture. Unexpected network communication may indicate that implemented communication paths deviate from the intended design.",
+      "nssa_relevance": "NSSA provides objective technical evidence that observed network communication paths are consistent with the intended segmentation policy by validating actual reachability against the authorized communication model.",
+      "applicable_to": [
+        "Segment Isolation Violation",
+        "Direct Policy Violation",
+        "Host Scoped Access Violation",
+        "Mandatory Transit Path Bypass"
+      ],
+      "expected_evidence": [
+        "Unauthorized communication path",
+        "Unexpected cross-segment communication",
+        "Observed communication inconsistent with the authorized communication model"
+      ],
+      "assessment_notes": [
+        "Unexpected communication provides objective technical evidence that implemented communication paths differ from those intended by the network architecture.",
+        "NSSA validates observable communication behaviour rather than network documentation."
+      ],
+      "limitations": [
+        "Cannot determine whether architectural documentation exists or is maintained.",
+        "Cannot assess business-level data flow documentation.",
+        "Only evaluates network communication behaviour against the intended segmentation policy."
+      ],
+      "keywords": [
+        "network communication",
+        "data flows",
+        "network architecture",
+        "segmentation",
+        "authorized communication"
+      ]
+    },
+    {
+      "control_id": "PR.AA-05",
+      "assessment_scope": "partial",
+      "title": "Access Permissions, Entitlements, and Authorizations are Defined, Managed, Enforced, and Reviewed",
+      "intent": "Ensure that access permissions enforce least privilege by allowing only authorized communications between systems and network segments.",
+      "security_goal": [
+        "Enforce least privilege",
+        "Restrict unauthorized access",
+        "Protect critical assets"
+      ],
+      "summary": "Access to network-accessible systems should only be permitted from authorized sources according to defined authorization policies. Unexpected communication may indicate ineffective enforcement of network-level access restrictions.",
+      "nssa_relevance": "NSSA provides objective technical evidence that network-level authorization policies are effectively enforced by validating observed communication against the intended segmentation policy.",
+      "applicable_to": [
+        "Host Scoped Access Violation",
+        "Segment Isolation Violation",
+        "Direct Policy Violation",
+        "Mandatory Transit Path Bypass"
+      ],
+      "expected_evidence": [
+        "Unauthorized host reaches a protected system",
+        "Unexpected network communication",
+        "Access inconsistent with least privilege"
+      ],
+      "assessment_notes": [
+        "Unexpected communication provides objective technical evidence that network-level authorization policies are not being enforced as intended.",
+        "NSSA evaluates network authorization rather than user identities or application authorization."
+      ],
+      "limitations": [
+        "Cannot assess identity management, authentication or user permissions.",
+        "Cannot determine application-level authorization decisions.",
+        "Only evaluates network-level access restrictions."
+      ],
+      "keywords": [
+        "least privilege",
+        "authorization",
+        "access control",
+        "network access",
+        "segmentation"
+      ]
+    },
+    {
+      "control_id": "PR.PS-01",
+      "assessment_scope": "partial",
+      "title": "Configuration Management Practices are Established and Applied",
+      "intent": "Ensure that technology platforms are configured so that deployed systems consistently enforce the intended security policy.",
+      "security_goal": [
+        "Maintain secure configurations",
+        "Prevent configuration drift",
+        "Ensure consistent security enforcement"
+      ],
+      "summary": "Technology platforms should consistently enforce the intended security policy. Unexpected network reachability may indicate that platform configurations are not producing the expected security behaviour.",
+      "nssa_relevance": "NSSA provides objective technical evidence that deployed configurations effectively enforce the intended segmentation policy by validating observed communication behaviour.",
+      "applicable_to": [
+        "Direct Policy Violation",
+        "Segment Isolation Violation",
+        "Host Scoped Access Violation",
+        "Mandatory Transit Path Bypass"
+      ],
+      "expected_evidence": [
+        "Unexpected communication path",
+        "Unauthorized network reachability",
+        "Communication inconsistent with the intended policy"
+      ],
+      "assessment_notes": [
+        "Observed communication inconsistent with policy provides objective technical evidence that deployed configurations are not enforcing the intended restrictions.",
+        "NSSA evaluates externally observable behaviour rather than platform configuration settings."
+      ],
+      "limitations": [
+        "Cannot inspect operating system, firewall or network device configurations.",
+        "Cannot determine which configuration caused the observed behaviour.",
+        "Does not assess configuration management processes."
+      ],
+      "keywords": [
+        "configuration management",
+        "configuration drift",
+        "platform security",
+        "network behaviour",
+        "segmentation"
+      ]
+    },
+    {
+      "control_id": "PR.IR-01",
+      "assessment_scope": "full",
+      "title": "Networks and Environments are Protected from Unauthorized Logical Access and Usage",
+      "intent": "Ensure that networks and network environments prevent unauthorized logical communications and enforce the intended security boundaries.",
+      "security_goal": [
+        "Prevent unauthorized logical access",
+        "Enforce network segmentation",
+        "Restrict lateral movement",
+        "Protect critical assets"
+      ],
+      "summary": "Networks should only permit authorized logical communications. Unauthorized communication between systems or network segments indicates that logical access controls are not effectively enforced.",
+      "nssa_relevance": "NSSA directly validates whether deployed network segmentation and logical access controls effectively prevent unauthorized communication by comparing observed reachability with the intended segmentation policy.",
+      "applicable_to": [
+        "Segment Isolation Violation",
+        "Direct Policy Violation",
+        "Host Scoped Access Violation",
+        "Mandatory Transit Path Bypass"
+      ],
+      "expected_evidence": [
+        "Unauthorized logical communication",
+        "Unexpected cross-segment communication",
+        "Communication bypassing intended security boundaries",
+        "Successful prohibited connection"
+      ],
+      "assessment_notes": [
+        "Observed unauthorized communication provides objective technical evidence that logical access protections are not effectively enforcing the intended network security architecture.",
+        "NSSA evaluates the effectiveness of logical access protection through observable network behaviour."
+      ],
+      "limitations": [
+        "Cannot determine which security technology enforces logical access restrictions.",
+        "Cannot inspect firewall rules, ACLs or device configurations.",
+        "Does not evaluate physical access controls."
+      ],
+      "keywords": [
+        "logical access",
+        "network segmentation",
+        "network protection",
+        "security boundaries",
+        "lateral movement"
+      ]
+    }
+  ]
+}

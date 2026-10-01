@@ -1,0 +1,388 @@
+{
+  "framework": "cis_controls",
+  "name": "Center for Internet Security Controls",
+  "version": "8",
+  "controls": [
+    {
+    "control_id": "3.3",
+    "assessment_scope": "partial",
+    "title": "Configure Data Access Control Lists",
+    "intent": "Ensure that access to data is restricted according to business need and least privilege by enforcing appropriate access control lists across enterprise systems.",
+    "security_goal": [
+        "Enforce least privilege",
+        "Restrict unauthorized access to sensitive data",
+        "Protect sensitive information"
+    ],
+    "summary": "Data should only be reachable by authorized systems and users according to defined access control policies. Unexpected network reachability to systems hosting sensitive data may indicate ineffective enforcement of access restrictions.",
+    "nssa_relevance": "NSSA provides objective technical evidence of whether network-level access restrictions protecting systems containing sensitive data are effectively enforced by validating observed communication against the intended segmentation policy.",
+    "applicable_to": [
+        "Host Scoped Access Violation",
+        "Segment Isolation Violation",
+        "Direct Policy Violation"
+    ],
+    "expected_evidence": [
+        "Unauthorized host reaches a protected system",
+        "Unexpected communication with systems containing sensitive data",
+        "Network reachability inconsistent with the intended access policy"
+    ],
+    "assessment_notes": [
+        "Unexpected communication with systems hosting sensitive data provides objective evidence that network-level access restrictions are not being enforced as intended.",
+        "NSSA evaluates network-level reachability rather than file system, database or application access permissions."
+    ],
+    "limitations": [
+        "Cannot assess file system, database or application access control lists.",
+        "Cannot determine user identities, permissions or authorization decisions.",
+        "Only evaluates network-level access restrictions defined by the segmentation policy."
+    ],
+    "keywords": [
+        "access control",
+        "least privilege",
+        "data protection",
+        "network authorization",
+        "sensitive data"
+    ]
+    },
+    {
+    "control_id": "3.8",
+    "assessment_scope": "partial",
+    "title": "Document Data Flows",
+    "intent": "Ensure that data flows are documented and understood so that data movement can be appropriately secured and monitored.",
+    "security_goal": [
+        "Protect sensitive data flows",
+        "Restrict unauthorized communications",
+        "Maintain visibility of data movement"
+    ],
+    "summary": "Sensitive data should only traverse authorized communication paths. Unexpected network connectivity may indicate data flows that are inconsistent with the intended architecture or undocumented communication paths.",
+    "nssa_relevance": "NSSA provides objective technical evidence that observed communication paths are consistent with the intended segmentation policy, helping identify unauthorized or unexpected network paths that may carry sensitive data.",
+    "applicable_to": [
+        "Segment Isolation Violation",
+        "Direct Policy Violation",
+        "Mandatory Transit Path Bypass",
+        "Host Scoped Access Violation"
+    ],
+    "expected_evidence": [
+        "Unexpected communication path",
+        "Unauthorized cross-segment communication",
+        "Communication bypassing intended transit paths",
+        "Observed connectivity inconsistent with the documented architecture"
+    ],
+    "assessment_notes": [
+        "Unexpected communication paths may indicate undocumented or unauthorized data flows requiring further investigation.",
+        "NSSA validates observable communication paths rather than documenting business-level data flows."
+    ],
+    "limitations": [
+        "Cannot determine the type, sensitivity or contents of transmitted data.",
+        "Cannot automatically discover or document business data flows.",
+        "Only evaluates whether network communication paths conform to the intended segmentation policy."
+    ],
+    "keywords": [
+        "data flows",
+        "communication paths",
+        "network segmentation",
+        "data movement",
+        "architecture validation"
+    ]
+    },
+    {
+    "control_id": "4.2",
+    "assessment_scope": "partial",
+    "title": "Establish and Maintain a Secure Configuration Process for Network Infrastructure",
+    "intent": "Ensure that network infrastructure is securely configured and maintained so that network communications are restricted according to the intended security architecture.",
+    "security_goal": [
+        "Maintain secure network configurations",
+        "Prevent configuration drift",
+        "Enforce intended network security policies"
+    ],
+    "summary": "Network infrastructure should consistently enforce the intended communication policy. Unexpected network reachability may indicate that network device configurations are not producing the expected security behaviour.",
+    "nssa_relevance": "NSSA provides objective technical evidence of whether network infrastructure effectively enforces the intended segmentation policy by validating observed communication against expected network behaviour.",
+    "applicable_to": [
+        "Direct Policy Violation",
+        "Segment Isolation Violation",
+        "Host Scoped Access Violation",
+        "Mandatory Transit Path Bypass"
+    ],
+    "expected_evidence": [
+        "Unexpected communication path",
+        "Unauthorized network reachability",
+        "Communication inconsistent with the intended segmentation policy"
+    ],
+    "assessment_notes": [
+        "Unexpected communication provides objective technical evidence that network infrastructure configurations are not enforcing the intended policy.",
+        "NSSA evaluates the observable behaviour of network infrastructure rather than configuration files or device settings."
+    ],
+    "limitations": [
+        "Cannot inspect firewall, router or switch configurations.",
+        "Cannot determine which configuration caused the observed behaviour.",
+        "Does not assess configuration management processes or documentation."
+    ],
+    "keywords": [
+        "network infrastructure",
+        "configuration management",
+        "segmentation",
+        "configuration drift",
+        "network security"
+    ]
+    },
+    {
+    "control_id": "4.4",
+    "assessment_scope": "partial",
+    "title": "Implement and Manage a Firewall on Servers",
+    "intent": "Ensure that server-based firewalls restrict network communications to only those explicitly authorized.",
+    "security_goal": [
+        "Restrict unauthorized communications",
+        "Reduce attack surface",
+        "Enforce host-level network protection"
+    ],
+    "summary": "Servers should only accept authorized network communications. Unexpected reachability may indicate that host-based firewall controls are not effectively enforcing the intended policy.",
+    "nssa_relevance": "NSSA provides objective technical evidence of whether server-hosted services are reachable only from authorized sources according to the intended segmentation policy.",
+    "applicable_to": [
+        "Host Scoped Access Violation",
+        "Direct Policy Violation",
+        "Segment Isolation Violation"
+    ],
+    "expected_evidence": [
+        "Unexpected reachable service",
+        "Unauthorized host reaches a protected server",
+        "Unexpected network communication"
+    ],
+    "assessment_notes": [
+        "Observed communication with a server that should be protected provides objective evidence that network-level restrictions are not effectively enforced."
+    ],
+    "limitations": [
+        "Cannot determine whether filtering is implemented by a host firewall, network firewall or another security control.",
+        "Cannot inspect firewall rules."
+    ],
+    "keywords": [
+        "host firewall",
+        "server protection",
+        "network access",
+        "service exposure"
+    ]
+    },
+    {
+    "control_id": "4.5",
+    "assessment_scope": "partial",
+    "title": "Implement and Manage a Firewall on End-User Devices",
+    "intent": "Ensure that end-user devices restrict network communications according to the intended security policy.",
+    "security_goal": [
+        "Protect end-user devices",
+        "Restrict unauthorized communications",
+        "Reduce attack surface"
+    ],
+    "summary": "End-user devices should only permit authorized network communications. Unexpected reachability may indicate ineffective enforcement of host-level network restrictions.",
+    "nssa_relevance": "NSSA provides objective technical evidence of whether end-user devices are reachable according to the intended segmentation policy.",
+    "applicable_to": [
+        "Direct Policy Violation",
+        "Segment Isolation Violation"
+    ],
+    "expected_evidence": [
+        "Unexpected communication with an end-user device",
+        "Unauthorized network reachability"
+    ],
+    "assessment_notes": [
+        "NSSA evaluates externally observable communication behaviour rather than firewall implementation."
+    ],
+    "limitations": [
+        "Cannot determine whether host-based firewall software is installed or correctly configured."
+    ],
+    "keywords": [
+        "endpoint firewall",
+        "host firewall",
+        "network exposure"
+    ]
+    },
+    {
+    "control_id": "4.8",
+    "assessment_scope": "partial",
+    "title": "Uninstall or Disable Unnecessary Services on Enterprise Assets and Software",
+    "intent": "Reduce the attack surface by ensuring that only required network services remain accessible.",
+    "security_goal": [
+        "Reduce attack surface",
+        "Limit exposed services",
+        "Prevent unnecessary network exposure"
+    ],
+    "summary": "Only services required for business operation should be reachable. Unexpected exposed services increase the attack surface and may indicate ineffective system hardening.",
+    "nssa_relevance": "NSSA provides objective technical evidence of unexpected network-accessible services by validating observed service reachability against the intended segmentation policy.",
+    "applicable_to": [
+        "Direct Policy Violation",
+        "Segment Isolation Violation"
+    ],
+    "expected_evidence": [
+        "Unexpected reachable service",
+        "Unexpected listening port",
+        "Service exposure inconsistent with policy"
+    ],
+    "assessment_notes": [
+        "NSSA evaluates externally observable service exposure rather than installed software or operating system configuration."
+    ],
+    "limitations": [
+        "Cannot determine whether unnecessary services exist but are not network-accessible.",
+        "Cannot inspect operating system configuration."
+    ],
+    "keywords": [
+        "service exposure",
+        "attack surface",
+        "hardening",
+        "reachable services"
+    ]
+    },
+    {
+    "control_id": "12.2",
+    "assessment_scope": "partial",
+    "title": "Establish and Maintain a Secure Network Architecture",
+    "intent": "Ensure that the network architecture enforces segmentation, least privilege and secure communication paths between enterprise systems.",
+    "security_goal": [
+        "Enforce network segmentation",
+        "Apply least privilege",
+        "Protect critical assets",
+        "Prevent unauthorized lateral movement"
+    ],
+    "summary": "Network architecture should ensure that communications occur only through authorized paths between authorized systems. Unexpected network reachability may indicate that the implemented architecture is not enforcing the intended security design.",
+    "nssa_relevance": "NSSA provides objective technical evidence of whether the deployed network architecture enforces the intended segmentation policy by validating observed communication paths against the expected architecture.",
+    "applicable_to": [
+        "Segment Isolation Violation",
+        "Direct Policy Violation",
+        "Host Scoped Access Violation",
+        "Mandatory Transit Path Bypass"
+    ],
+    "expected_evidence": [
+        "Unexpected communication path",
+        "Unauthorized cross-segment communication",
+        "Bypass of mandatory transit paths",
+        "Unexpected access to protected systems"
+    ],
+    "assessment_notes": [
+        "Unexpected communication provides objective technical evidence that the implemented network architecture is not enforcing the intended security boundaries.",
+        "NSSA evaluates the observable behaviour of the deployed architecture rather than architectural documentation or design decisions."
+    ],
+    "limitations": [
+        "Cannot assess architectural documentation or design rationale.",
+        "Cannot determine how segmentation is implemented internally.",
+        "Only validates the effectiveness of the deployed architecture."
+    ],
+    "keywords": [
+        "network architecture",
+        "segmentation",
+        "least privilege",
+        "lateral movement",
+        "security boundaries"
+    ]
+    },
+    {
+    "control_id": "12.3",
+    "assessment_scope": "partial",
+    "title": "Securely Manage Network Infrastructure",
+    "intent": "Ensure that network infrastructure is managed in a manner that preserves the intended security posture and prevents unauthorized communications.",
+    "security_goal": [
+        "Maintain secure network operation",
+        "Prevent unauthorized communications",
+        "Preserve network security posture"
+    ],
+    "summary": "Network infrastructure should consistently enforce the intended communication policy. Unexpected connectivity may indicate ineffective management or configuration of network infrastructure.",
+    "nssa_relevance": "NSSA provides objective technical evidence that network infrastructure is or is not enforcing the intended segmentation policy based on observed communication behaviour.",
+    "applicable_to": [
+        "Direct Policy Violation",
+        "Segment Isolation Violation",
+        "Host Scoped Access Violation",
+        "Mandatory Transit Path Bypass"
+    ],
+    "expected_evidence": [
+        "Unexpected network communication",
+        "Unauthorized communication path",
+        "Connectivity inconsistent with policy"
+    ],
+    "assessment_notes": [
+        "Observed communication inconsistent with policy provides objective technical evidence that network infrastructure is not enforcing the intended restrictions."
+    ],
+    "limitations": [
+        "Cannot determine whether secure management protocols or infrastructure-as-code are used.",
+        "Cannot inspect network device configurations."
+    ],
+    "keywords": [
+        "network infrastructure",
+        "network management",
+        "segmentation",
+        "network security"
+    ]
+    },
+    {
+    "control_id": "12.8",
+    "assessment_scope": "partial",
+    "title": "Establish and Maintain Dedicated Computing Resources for All Administrative Work",
+    "intent": "Ensure that administrative access originates only from dedicated and appropriately isolated computing resources.",
+    "security_goal": [
+        "Protect administrative access",
+        "Restrict privileged network communications",
+        "Reduce administrative attack surface"
+    ],
+    "summary": "Administrative interfaces should only be reachable from dedicated and authorized systems. Unexpected administrative network access may indicate ineffective enforcement of privileged access restrictions.",
+    "nssa_relevance": "NSSA provides objective technical evidence that administrative services are only reachable from authorized systems by validating host-to-service communication against the intended segmentation policy.",
+    "applicable_to": [
+        "Host Scoped Access Violation",
+        "Mandatory Transit Path Bypass",
+        "Direct Policy Violation"
+    ],
+    "expected_evidence": [
+        "Unauthorized host reaches an administrative service",
+        "Unexpected communication to management interfaces",
+        "Administrative access from non-designated systems"
+    ],
+    "assessment_notes": [
+        "Observed communication from unauthorized systems provides objective technical evidence that network restrictions protecting administrative resources are not being effectively enforced."
+    ],
+    "limitations": [
+        "Cannot determine whether dedicated administrative workstations actually exist.",
+        "Cannot distinguish administrative users from standard users.",
+        "Only evaluates network-level communication restrictions."
+    ],
+    "keywords": [
+        "administrative access",
+        "privileged systems",
+        "management network",
+        "host authorization",
+        "segmentation"
+    ]
+    },
+    {
+    "control_id": "13.4",
+    "assessment_scope": "full",
+    "title": "Perform Traffic Filtering Between Network Segments",
+    "intent": "Ensure that traffic between network segments is restricted to only authorized communications in accordance with the intended security policy.",
+    "security_goal": [
+        "Enforce network segmentation",
+        "Restrict unauthorized communications",
+        "Prevent lateral movement",
+        "Protect critical assets"
+    ],
+    "summary": "Traffic between network segments should only be permitted where explicitly authorized. Unexpected network communication indicates that traffic filtering controls are not effectively enforcing the intended segmentation policy.",
+    "nssa_relevance": "NSSA directly validates whether traffic filtering between network segments is effectively enforced by comparing observed network reachability with the intended segmentation policy.",
+    "applicable_to": [
+        "Segment Isolation Violation",
+        "Direct Policy Violation",
+        "Host Scoped Access Violation",
+        "Mandatory Transit Path Bypass"
+    ],
+    "expected_evidence": [
+        "Unauthorized cross-segment communication",
+        "Unexpected communication path",
+        "Successful prohibited connection",
+        "Communication bypassing intended network boundaries"
+    ],
+    "assessment_notes": [
+        "Observed communication between network segments that should be isolated provides objective technical evidence that traffic filtering controls are not being effectively enforced.",
+        "NSSA evaluates the externally observable behaviour of traffic filtering rather than the underlying filtering technology."
+    ],
+    "limitations": [
+        "Cannot determine whether filtering is implemented using firewalls, ACLs, routers or other security controls.",
+        "Cannot inspect filtering rules or device configurations."
+    ],
+    "keywords": [
+        "traffic filtering",
+        "network segmentation",
+        "cross-segment communication",
+        "lateral movement",
+        "network boundaries"
+    ]
+    }
+  ]
+}

@@ -1,0 +1,394 @@
+{
+  "framework": "iso_27002",
+  "name": "ISO/IEC 27002Information Security Standard",
+  "version": "2022",
+   "controls": [
+    {
+        "control_id": "5.15",
+        "assessment_scope": "partial",
+        "title": "Access Control",
+        "intent": "Ensure that access to information, network resources and other associated assets is restricted according to business and information security requirements, preventing unauthorised access.",
+        "security_goal": [
+            "Enforce least privilege",
+            "Prevent unauthorised access",
+            "Restrict network communication to authorised entities"
+        ],
+        "summary": "Access control rules should ensure that only authorised entities are able to access information, network services and other associated assets according to business need. Access should follow least-privilege principles and default-deny wherever possible.",
+        "nssa_relevance": "NSSA provides objective technical evidence that network-level access control rules are effectively enforced by verifying whether observed host-to-host communication matches the authorised segmentation policy.",
+        "applicable_to": [
+            "Direct Policy Violation",
+            "Segment Isolation Violation",
+            "Host Scoped Access Violation",
+            "Mandatory Transit Path Bypass"
+        ],
+        "expected_evidence": [
+            "Unauthorised host-to-host communication",
+            "Unexpected network reachability",
+            "Communication violating the authorised segmentation policy",
+            "Reachability inconsistent with least-privilege principles"
+        ],
+        "assessment_notes": [
+            "Successful communication from an unauthorised source provides objective evidence that network-level access restrictions are not being enforced as intended.",
+            "NSSA evaluates observable network behaviour rather than the implementation mechanism of access control."
+        ],
+        "limitations": [
+            "Cannot determine user identities or authentication mechanisms.",
+            "Cannot assess RBAC, ABAC, DAC or MAC implementations.",
+            "Cannot determine whether application-layer authorisation subsequently denied the request.",
+            "Cannot verify administrative processes for granting, reviewing or revoking access rights."
+        ],
+        "keywords": [
+            "access control",
+            "least privilege",
+            "default deny",
+            "network access",
+            "business need",
+            "segmentation",
+            "authorisation"
+        ]
+    },
+    {
+        "control_id": "5.18",
+        "assessment_scope": "partial",
+        "title": "Access Rights",
+        "intent": "Ensure that access rights to information and other associated assets are provisioned, reviewed, modified and revoked according to business requirements and the organization's access control policy.",
+        "security_goal": [
+            "Ensure authorised access",
+            "Enforce least privilege",
+            "Prevent excessive or unauthorised access"
+        ],
+        "summary": "Access rights should be assigned, reviewed and removed according to business requirements and the principle of least privilege. Entities should only retain the network access necessary to perform their authorised functions.",
+        "nssa_relevance": "NSSA provides objective technical evidence that effective network-level access rights are consistent with the intended segmentation policy by verifying whether observed communication paths are limited to authorised hosts and services.",
+        "applicable_to": [
+            "Host Scoped Access Violation",
+            "Direct Policy Violation",
+            "Segment Isolation Violation"
+        ],
+        "expected_evidence": [
+            "Unauthorised host reaches a protected service",
+            "Unexpected network communication",
+            "Host retains network access beyond its authorised scope",
+            "Observed communication violating the declared segmentation policy"
+        ],
+        "assessment_notes": [
+            "Unexpected communication from an unauthorised host provides objective evidence that effective network-level access permissions exceed the intended policy.",
+            "NSSA validates the observable outcome of access-right enforcement rather than the administrative processes used to grant or revoke permissions."
+        ],
+        "limitations": [
+            "Cannot determine how access rights were provisioned, approved or revoked.",
+            "Cannot verify periodic access reviews or recertification processes.",
+            "Cannot assess identity management, user lifecycle management or privileged account administration.",
+            "Cannot determine whether application-layer or operating-system permissions subsequently denied access."
+        ],
+        "keywords": [
+            "access rights",
+            "least privilege",
+            "authorised access",
+            "host allowlist",
+            "network authorisation",
+            "segmentation"
+        ]
+    },
+    {
+    "control_id": "8.3",
+    "assessment_scope": "partial",
+    "title": "Information Access Restriction",
+    "intent": "Ensure that access to information and other associated assets is restricted according to the organization's access control policy, allowing only authorised entities to access protected resources.",
+    "security_goal": [
+        "Prevent unauthorised access",
+        "Enforce least privilege",
+        "Restrict access according to business requirements"
+    ],
+    "summary": "Access to information, systems and network-accessible resources should be restricted according to the organisation's access control policy. Only authorised entities should be able to communicate with or access protected services and assets.",
+    "nssa_relevance": "NSSA provides objective technical evidence that network-level access restrictions are effectively enforced by verifying whether observed communication paths comply with the authorised segmentation policy.",
+    "applicable_to": [
+        "Direct Policy Violation",
+        "Segment Isolation Violation",
+        "Host Scoped Access Violation",
+        "Mandatory Transit Path Bypass"
+    ],
+    "expected_evidence": [
+        "Unauthorised host reaches a protected resource",
+        "Unexpected network reachability",
+        "Communication violating the authorised segmentation policy",
+        "Unexpected access to a restricted service"
+    ],
+    "assessment_notes": [
+        "A successful connection to a resource that should not be reachable constitutes objective evidence that network-level access restrictions are not being enforced as intended.",
+        "NSSA validates the observable enforcement of network access restrictions rather than the mechanisms used to implement them."
+    ],
+    "limitations": [
+        "Cannot determine whether authentication, ACLs or application-layer authorisation subsequently denied access.",
+        "Cannot assess dynamic access management, identity-based policies or encryption-based access controls.",
+        "Cannot determine whether access restrictions are based on user identity, device identity or contextual attributes."
+    ],
+    "keywords": [
+        "access restriction",
+        "authorised access",
+        "least privilege",
+        "network access",
+        "protected resources",
+        "segmentation",
+        "policy enforcement"
+    ]
+    },
+    {
+    "control_id": "8.9",
+    "assessment_scope": "partial",
+    "title": "Configuration Management",
+    "intent": "Ensure that hardware, software, services and network configurations are securely established, maintained, monitored and reviewed to prevent unauthorized or incorrect changes.",
+    "security_goal": [
+        "Maintain secure configurations",
+        "Prevent configuration drift",
+        "Ensure consistent enforcement of security policies"
+    ],
+    "summary": "Hardware, software, services and network devices should maintain secure and consistent configurations throughout their lifecycle. Unauthorized or incorrect configuration changes should be detected and corrected to preserve the intended security posture.",
+    "nssa_relevance": "NSSA provides objective technical evidence of the effectiveness of network-related configurations by verifying whether the observed communication behaviour matches the intended segmentation policy. Unexpected connectivity may indicate configuration drift or incorrect security settings affecting network enforcement.",
+    "applicable_to": [
+        "Direct Policy Violation",
+        "Segment Isolation Violation",
+        "Host Scoped Access Violation",
+        "Mandatory Transit Path Bypass"
+    ],
+    "expected_evidence": [
+        "Unexpected network reachability",
+        "Unauthorised communication path",
+        "Unexpected service exposure",
+        "Observed behaviour inconsistent with the intended network configuration"
+    ],
+    "assessment_notes": [
+        "Unexpected communication provides objective evidence that network-related configurations are not enforcing the intended security policy.",
+        "NSSA evaluates the externally observable behaviour of network security controls rather than inspecting device configurations directly."
+    ],
+    "limitations": [
+        "Cannot inspect firewall, router, switch or host configurations.",
+        "Cannot determine which specific configuration caused the observed behaviour.",
+        "Cannot verify change management procedures, configuration baselines or configuration records.",
+        "Cannot determine whether configuration deviations resulted from authorised or unauthorised changes."
+    ],
+    "keywords": [
+        "configuration management",
+        "configuration drift",
+        "secure configuration",
+        "network configuration",
+        "policy enforcement",
+        "segmentation"
+    ]
+    },
+    {
+    "control_id": "8.20",
+    "assessment_scope": "partial",
+    "title": "Networks Security",
+    "intent": "Ensure that networks and network devices are securely managed and controlled to protect information, systems and applications from unauthorized access and compromise.",
+    "security_goal": [
+        "Protect network communications",
+        "Prevent unauthorised network access",
+        "Enforce network security controls",
+        "Maintain secure network boundaries"
+    ],
+    "summary": "Networks and network devices should enforce appropriate security controls to ensure that only authorised communications are permitted and that protected systems remain isolated according to the organisation's security policy.",
+    "nssa_relevance": "NSSA provides objective technical evidence of the effectiveness of network security controls by verifying whether observed network reachability complies with the intended segmentation policy. Unexpected connectivity indicates that network security controls are not enforcing the intended restrictions.",
+    "applicable_to": [
+        "Direct Policy Violation",
+        "Segment Isolation Violation",
+        "Host Scoped Access Violation",
+        "Mandatory Transit Path Bypass"
+    ],
+    "expected_evidence": [
+        "Unexpected network reachability",
+        "Unauthorised communication between network segments",
+        "Unexpected access to protected services",
+        "Communication violating the authorised segmentation policy"
+    ],
+    "assessment_notes": [
+        "Successful communication that violates the declared segmentation policy provides objective evidence that network security controls are not enforcing the intended restrictions.",
+        "NSSA evaluates the externally observable behaviour of network security controls rather than inspecting their implementation."
+    ],
+    "limitations": [
+        "Cannot determine which specific network security control (e.g. firewall, ACL, router configuration or SDN policy) failed.",
+        "Cannot assess encryption, device authentication, network device hardening or protocol security.",
+        "Cannot verify logging, monitoring or operational management procedures for network infrastructure."
+    ],
+    "keywords": [
+        "network security",
+        "network protection",
+        "segmentation",
+        "network devices",
+        "reachability",
+        "policy enforcement",
+        "network isolation"
+    ]
+    },
+    {
+    "control_id": "8.21",
+    "assessment_scope": "partial",
+    "title": "Security of Network Services",
+    "intent": "Ensure that network services are protected through appropriate security mechanisms, service requirements and access controls, allowing only authorised use.",
+    "security_goal": [
+        "Protect network services",
+        "Restrict unauthorised access",
+        "Ensure secure service exposure"
+    ],
+    "summary": "Network services should only be accessible according to the organisation's security requirements. Security mechanisms should ensure that only authorised entities are able to reach approved network services.",
+    "nssa_relevance": "NSSA provides objective technical evidence that network services are exposed only to authorised hosts and network segments by verifying whether observed service reachability complies with the intended segmentation policy.",
+    "applicable_to": [
+        "Direct Policy Violation",
+        "Host Scoped Access Violation",
+        "Segment Isolation Violation"
+    ],
+    "expected_evidence": [
+        "Unexpected reachable network service",
+        "Unauthorised host reaches a protected service",
+        "Unexpected service exposure",
+        "Communication violating the authorised segmentation policy"
+    ],
+    "assessment_notes": [
+        "A successful connection to a network service from an unauthorised source provides objective evidence that network service exposure exceeds the intended security policy.",
+        "NSSA validates the observable exposure of network services rather than the internal implementation of service security mechanisms."
+    ],
+    "limitations": [
+        "Cannot assess authentication, encryption or application-layer security mechanisms.",
+        "Cannot verify service level agreements or provider operational practices.",
+        "Cannot determine whether access was subsequently denied by the application itself."
+    ],
+    "keywords": [
+        "network services",
+        "service exposure",
+        "authorised services",
+        "network security",
+        "segmentation",
+        "reachability"
+    ]
+    },
+    {
+    "control_id": "8.22",
+    "assessment_scope": "full",
+    "title": "Segregation of Networks",
+    "intent": "Ensure that information systems, users and services are separated into security domains and that communication between those domains is restricted according to business requirements.",
+    "security_goal": [
+        "Enforce network segmentation",
+        "Protect security boundaries",
+        "Prevent unauthorised lateral movement",
+        "Control inter-segment communication"
+    ],
+    "summary": "Networks should be divided into security domains based on business needs, trust levels and asset sensitivity. Communication between domains should only be permitted where explicitly authorised and should be controlled at defined security boundaries.",
+    "nssa_relevance": "NSSA directly evaluates the effectiveness of network segmentation by verifying whether observed communication paths comply with the authorised segmentation policy. It provides objective technical evidence that security boundaries are correctly enforced.",
+    "applicable_to": [
+        "Segment Isolation Violation",
+        "Direct Policy Violation",
+        "Host Scoped Access Violation",
+        "Mandatory Transit Path Bypass"
+    ],
+    "expected_evidence": [
+        "Unauthorised communication between network segments",
+        "Unexpected inter-segment connectivity",
+        "Unexpected communication across security boundaries",
+        "Traffic bypassing mandatory segmentation controls"
+    ],
+    "assessment_notes": [
+        "A single successful communication crossing a prohibited security boundary constitutes objective evidence that network segmentation is not being enforced as intended.",
+        "NSSA directly validates the observable behaviour of segmentation controls independently of the underlying enforcement technology."
+    ],
+    "limitations": [
+        "Cannot determine which specific security device or technology is responsible for enforcing segmentation.",
+        "Cannot assess gateway configuration, firewall rule quality or internal device hardening.",
+        "Assumes that the declared segmentation policy accurately reflects the organisation's intended architecture."
+    ],
+    "keywords": [
+        "network segmentation",
+        "security domains",
+        "network isolation",
+        "security boundaries",
+        "lateral movement",
+        "inter-segment communication",
+        "segmentation enforcement"
+    ]   
+    },
+    {
+    "control_id": "8.27",
+    "assessment_scope": "partial",
+    "title": "Secure System Architecture and Engineering Principles",
+    "intent": "Ensure that secure engineering principles are established and applied throughout the system lifecycle so that information systems are designed, implemented and operated according to security requirements.",
+    "security_goal": [
+        "Support secure-by-design architectures",
+        "Enforce defence in depth",
+        "Apply least privilege",
+        "Maintain secure network boundaries"
+    ],
+    "summary": "Information systems should be designed using secure engineering principles such as security by design, defence in depth, default deny, least privilege and zero trust. Security controls should operate together to provide a coherent and resilient security architecture.",
+    "nssa_relevance": "NSSA provides objective technical evidence that network segmentation and communication restrictions, as manifestations of secure architecture principles, are effectively enforced by validating observed network behaviour against the intended segmentation policy.",
+    "applicable_to": [
+        "Segment Isolation Violation",
+        "Direct Policy Violation",
+        "Host Scoped Access Violation",
+        "Mandatory Transit Path Bypass"
+    ],
+    "expected_evidence": [
+        "Unexpected communication across security boundaries",
+        "Violation of least-privilege communication paths",
+        "Unexpected lateral movement opportunities",
+        "Observed network behaviour inconsistent with the intended secure architecture"
+    ],
+    "assessment_notes": [
+        "Unexpected communication paths may indicate that secure engineering principles such as default deny, defence in depth or network segmentation are not being effectively enforced.",
+        "NSSA evaluates the observable behaviour resulting from the implemented architecture rather than the architectural design process itself."
+    ],
+    "limitations": [
+        "Cannot assess architecture design reviews, threat modelling or secure development practices.",
+        "Cannot determine whether secure engineering principles were formally adopted during system design.",
+        "Cannot evaluate application security, identity architecture or non-network security controls.",
+        "Only assesses the network-level manifestations of the implemented security architecture."
+    ],
+    "keywords": [
+        "secure architecture",
+        "security by design",
+        "defence in depth",
+        "zero trust",
+        "least privilege",
+        "default deny",
+        "network segmentation"
+    ]
+    },
+    {
+    "control_id": "8.31",
+    "assessment_scope": "partial",
+    "title": "Separation of Development, Test and Production Environments",
+    "intent": "Ensure that development, testing and production environments are appropriately separated and secured to protect production systems and data from unauthorized access or unintended changes.",
+    "security_goal": [
+        "Separate development and production environments",
+        "Protect production systems",
+        "Prevent unauthorized cross-environment access"
+    ],
+    "summary": "Development, testing and production environments should operate as distinct security domains with controlled communication paths and access restrictions to reduce the risk of accidental or unauthorized compromise of production systems.",
+    "nssa_relevance": "NSSA provides objective technical evidence of whether network-level separation between development, testing and production environments is effectively enforced by validating communication paths against the intended segmentation policy.",
+    "applicable_to": [
+        "Segment Isolation Violation",
+        "Direct Policy Violation",
+        "Mandatory Transit Path Bypass"
+    ],
+    "expected_evidence": [
+        "Unexpected communication between development and production environments",
+        "Unexpected cross-environment network reachability",
+        "Communication violating the intended environment separation policy"
+    ],
+    "assessment_notes": [
+        "Successful communication between environments that should be isolated provides objective evidence that network-level separation is not being enforced as intended.",
+        "NSSA evaluates only the enforcement of network separation and does not assess development lifecycle or deployment processes."
+    ],
+    "limitations": [
+        "Cannot determine whether development, test and production environments are administratively separated.",
+        "Cannot assess deployment approval processes, change management or segregation of duties.",
+        "Cannot verify environment labelling, development tools, monitoring or backup practices.",
+        "Only evaluates network-level isolation where such separation is defined in the segmentation policy."
+    ],
+    "keywords": [
+        "development environment",
+        "test environment",
+        "production environment",
+        "environment separation",
+        "network segmentation",
+        "network isolation"
+    ]
+    }  
+  ]
+}

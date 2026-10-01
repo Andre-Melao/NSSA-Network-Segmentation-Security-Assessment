@@ -1,0 +1,570 @@
+{
+  "policy": {
+    "groups": [
+      {
+        "name": "users",
+        "criticality": "low",
+        "description": "Corporate user workstations and employee endpoints"
+      },
+      {
+        "name": "dmz",
+        "criticality": "medium",
+        "description": "Public-facing web and mail services exposed to external networks"
+      },
+      {
+        "name": "services",
+        "criticality": "high",
+        "description": "Internal infrastructure and administrative services including DNS, SIEM, bastion access and application services"
+      },
+      {
+        "name": "critical",
+        "criticality": "critical",
+        "description": "Cardholder data environment containing payment systems and sensitive financial data"
+      },
+      {
+        "name": "frontend",
+        "criticality": "medium",
+        "description": "Public web workloads"
+      },
+      {
+        "name": "api",
+        "criticality": "high",
+        "description": "Application API tier"
+      },
+      {
+        "name": "platform",
+        "criticality": "high",
+        "description": "Internal services"
+      },
+      {
+        "name": "monitoring",
+        "criticality": "medium",
+        "description": "Monitoring and observability"
+      },
+      {
+        "name": "secrets",
+        "criticality": "critical",
+        "description": "Secrets management"
+      }
+    ],
+    "servers": [
+      {
+        "name": "user-ws01",
+        "ip": "10.10.10.10",
+        "groups": [
+          "users"
+        ]
+      },
+      {
+        "name": "user-ws02",
+        "ip": "10.10.10.11",
+        "groups": [
+          "users"
+        ]
+      },
+      {
+        "name": "web01",
+        "ip": "10.10.20.10",
+        "groups": [
+          "dmz"
+        ]
+      },
+      {
+        "name": "web02",
+        "ip": "10.10.20.11",
+        "groups": [
+          "dmz"
+        ]
+      },
+      {
+        "name": "mail-relay",
+        "ip": "10.10.20.20",
+        "groups": [
+          "dmz"
+        ]
+      },
+      {
+        "name": "dns01",
+        "ip": "10.10.30.10",
+        "groups": [
+          "services"
+        ]
+      },
+      {
+        "name": "ntp01",
+        "ip": "10.10.30.11",
+        "groups": [
+          "services"
+        ]
+      },
+      {
+        "name": "siem01",
+        "ip": "10.10.30.12",
+        "groups": [
+          "services"
+        ]
+      },
+      {
+        "name": "bastion",
+        "ip": "10.10.30.13",
+        "groups": [
+          "services"
+        ]
+      },
+      {
+        "name": "app01",
+        "ip": "10.10.30.20",
+        "groups": [
+          "services"
+        ]
+      },
+      {
+        "name": "backup01",
+        "ip": "10.10.30.30",
+        "groups": [
+          "services"
+        ]
+      },
+      {
+        "name": "db01",
+        "ip": "10.10.40.10",
+        "groups": [
+          "critical"
+        ]
+      },
+      {
+        "name": "payapi01",
+        "ip": "10.10.40.20",
+        "groups": [
+          "critical"
+        ]
+      },
+      {
+        "name": "agent01",
+        "ip": "10.10.40.30",
+        "groups": [
+          "critical"
+        ]
+      },
+      {
+        "name": "syslog01",
+        "ip": "10.10.40.40",
+        "groups": [
+          "critical"
+        ]
+      },
+      {
+        "name": "frontend-01",
+        "ip": "10.10.51.11",
+        "groups": [
+          "frontend",
+          "monitoring"
+        ]
+      },
+      {
+        "name": "frontend-02",
+        "ip": "10.10.51.12",
+        "groups": [
+          "frontend",
+          "monitoring"
+        ]
+      },
+      {
+        "name": "api-01",
+        "ip": "10.10.51.21",
+        "groups": [
+          "api",
+          "monitoring"
+        ]
+      },
+      {
+        "name": "api-02",
+        "ip": "10.10.51.22",
+        "groups": [
+          "api",
+          "monitoring"
+        ]
+      },
+      {
+        "name": "worker-01",
+        "ip": "10.10.52.31",
+        "groups": [
+          "platform",
+          "monitoring"
+        ]
+      },
+      {
+        "name": "vault-01",
+        "ip": "10.10.52.41",
+        "groups": [
+          "platform",
+          "secrets",
+          "monitoring"
+        ]
+      },
+      {
+        "name": "metrics-01",
+        "ip": "10.10.52.51",
+        "groups": [
+          "monitoring"
+        ]
+      }
+    ],
+    "rules": [
+      {
+        "id": "R001",
+        "src": "users",
+        "dst": "web01",
+        "proto": "tcp",
+        "ports": [
+          80,
+          443
+        ],
+        "purpose": "web access"
+      },
+      {
+        "id": "R002",
+        "src": "users",
+        "dst": "mail-relay",
+        "proto": "tcp",
+        "ports": [
+          587
+        ],
+        "purpose": "smtp submission"
+      },
+      {
+        "id": "R003",
+        "src": "users",
+        "dst": "dns01",
+        "proto": "udp",
+        "ports": [
+          53
+        ],
+        "purpose": "dns resolution"
+      },
+      {
+        "id": "R004",
+        "src": "users",
+        "dst": "ntp01",
+        "proto": "udp",
+        "ports": [
+          123
+        ],
+        "purpose": "time sync"
+      },
+      {
+        "id": "R005",
+        "src": "dmz",
+        "dst": "app01",
+        "proto": "tcp",
+        "ports": [
+          8080,
+          8443
+        ],
+        "purpose": "web to app tier"
+      },
+      {
+        "id": "R006",
+        "src": "dmz",
+        "dst": "dns01",
+        "proto": "udp",
+        "ports": [
+          53
+        ],
+        "purpose": "dns"
+      },
+      {
+        "id": "R007",
+        "src": "dmz",
+        "dst": "ntp01",
+        "proto": "udp",
+        "ports": [
+          123
+        ],
+        "purpose": "ntp"
+      },
+      {
+        "id": "R008",
+        "src": "dmz",
+        "dst": "siem01",
+        "proto": "tcp",
+        "ports": [
+          6514
+        ],
+        "purpose": "syslog over tls"
+      },
+      {
+        "id": "R009",
+        "src": "users",
+        "dst": "backup01",
+        "proto": "tcp",
+        "ports": [
+          3389
+        ],
+        "purpose": "admin rdp"
+      },
+      {
+        "id": "R010",
+        "src": "bastion",
+        "dst": "web01",
+        "proto": "tcp",
+        "ports": [
+          22
+        ],
+        "purpose": "admin ssh"
+      },
+      {
+        "id": "R011",
+        "src": "bastion",
+        "dst": "web02",
+        "proto": "tcp",
+        "ports": [
+          22
+        ],
+        "purpose": "admin ssh"
+      },
+      {
+        "id": "R012",
+        "src": "app01",
+        "dst": "db01",
+        "proto": "tcp",
+        "ports": [
+          5432
+        ],
+        "purpose": "postgresql"
+      },
+      {
+        "id": "R013",
+        "src": "app01",
+        "dst": "payapi01",
+        "proto": "tcp",
+        "ports": [
+          8443
+        ],
+        "purpose": "payment api"
+      },
+      {
+        "id": "R014",
+        "src": "backup01",
+        "dst": "agent01",
+        "proto": "tcp",
+        "ports": [
+          3389
+        ],
+        "purpose": "admin access to backup agent"
+      },
+      {
+        "id": "R015",
+        "src": "syslog01",
+        "dst": "siem01",
+        "proto": "tcp",
+        "ports": [
+          6514
+        ],
+        "purpose": "log forwarding"
+      },
+      {
+        "id": "R016",
+        "src": "db01",
+        "dst": "dns01",
+        "proto": "udp",
+        "ports": [
+          53
+        ],
+        "purpose": "dns"
+      },
+      {
+        "id": "R017",
+        "src": "db01",
+        "dst": "ntp01",
+        "proto": "udp",
+        "ports": [
+          123
+        ],
+        "purpose": "ntp"
+      },
+      {
+        "id": "R101",
+        "src": "frontend",
+        "dst": "api",
+        "proto": "tcp",
+        "ports": [
+          443
+        ],
+        "purpose": "Frontend to API"
+      },
+      {
+        "id": "R102",
+        "src": "api",
+        "dst": "platform",
+        "proto": "tcp",
+        "ports": [
+          8443
+        ],
+        "purpose": "API to internal services"
+      },
+      {
+        "id": "R103",
+        "src": "worker-01",
+        "dst": "vault-01",
+        "proto": "tcp",
+        "ports": [
+          8200
+        ],
+        "purpose": "Worker retrieves secrets"
+      },
+      {
+        "id": "R104",
+        "src": "monitoring",
+        "dst": "frontend",
+        "proto": "tcp",
+        "ports": [
+          9100
+        ],
+        "purpose": "Metrics collection"
+      },
+      {
+        "id": "R105",
+        "src": "monitoring",
+        "dst": "api",
+        "proto": "tcp",
+        "ports": [
+          9100
+        ],
+        "purpose": "Metrics collection"
+      },
+      {
+        "id": "R106",
+        "src": "monitoring",
+        "dst": "platform",
+        "proto": "tcp",
+        "ports": [
+          9100
+        ],
+        "purpose": "Metrics collection"
+      },
+      {
+        "id": "R107",
+        "src": "monitoring",
+        "dst": "secrets",
+        "proto": "tcp",
+        "ports": [
+          9100
+        ],
+        "purpose": "Metrics collection"
+      }
+    ],
+    "mandatory_transit_paths": [
+      {
+        "id": "T001",
+        "src": "users",
+        "via": "bastion",
+        "dst": "critical",
+        "proto": "tcp",
+        "ports": [
+          22
+        ],
+        "purpose": "admin ssh access to the critical environment must traverse the bastion host."
+      },
+      {
+        "id": "T002",
+        "src": "users",
+        "dst": "critical",
+        "via": "bastion",
+        "proto": "tcp",
+        "ports": [
+          3389
+        ],
+        "purpose": "RDP-based administrative access to the critical environment must traverse the bastion host."
+      },
+      {
+        "id": "T101",
+        "src": "frontend",
+        "via": "api",
+        "dst": "secrets",
+        "proto": "tcp",
+        "ports": [
+          8200
+        ],
+        "purpose": "Frontend access to secrets must traverse the API tier."
+      }
+    ]
+  },
+  "deployment": {
+    "probes": [
+      {
+        "name": "probe-users",
+        "ip": "10.10.10.100",
+        "probing_mode": "representative",
+        "groups": [
+          "users"
+        ],
+        "execution": "automated",
+        "ssh_profile": "default"
+      },
+      {
+        "name": "probe-dmz",
+        "ip": "10.10.20.100",
+        "probing_mode": "representative",
+        "groups": [
+          "dmz"
+        ],
+        "execution": "automated",
+        "ssh_profile": "default"
+      },
+      {
+        "name": "probe-services",
+        "ip": "10.10.30.100",
+        "probing_mode": "representative",
+        "groups": [
+          "services"
+        ],
+        "execution": "automated",
+        "ssh_profile": "default"
+      },
+      {
+        "name": "probe-critical",
+        "ip": "10.10.40.100",
+        "probing_mode": "representative",
+        "groups": [
+          "critical"
+        ],
+        "execution": "automated",
+        "ssh_profile": "default"
+      },
+      {
+        "name": "probe-micro",
+        "ip": "10.10.50.100",
+        "probing_mode": "host",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+        "groups": [
+          "frontend",
+          "api",
+          "platform",
+          "monitoring",
+          "secrets"
+        ],
+        "execution": "automated",
+        "ssh_profile": "default"
+      }
+    ]
+  },
+  "authentication": {
+    "ssh_profiles": {
+      "default": {
+        "username": "root",
+        "private_key": "~/.ssh/nssa_audit_ed25519"
+      }
+    },
+    "llm": {
+      "provider": "gemini",
+      "api_key": "env:GEMINI_API_KEY",
+      "model": "gemini-3.1-pro"
+    },
+    "frameworks": [
+      "pci_dss",
+      "iso_27002",
+      "cis_controls",
+      "nist_csf"
+    ]
+  }
+}
